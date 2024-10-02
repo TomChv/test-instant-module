@@ -29,13 +29,12 @@ class Test {
    * Returns lines that match a pattern in the files of the provided Directory
    */
   @func()
-  async grepDir(directoryArg: Directory, pattern: string): Promise<string> {
+  grepDir(directoryArg: Directory, pattern: string): Container {
     return dag
       .container()
       .from("alpine:latest")
       .withMountedDirectory("/mnt", directoryArg)
       .withWorkdir("/mnt")
       .withExec(["grep", "-R", pattern, "."])
-      .stdout()
   }
 }
