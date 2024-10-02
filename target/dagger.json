@@ -1,0 +1,5 @@
+{
+  "name": "foo",
+  "sdk": "https://github.com/TomChv/test-instant-module/test",
+  "engineVersion": "v0.13.3"
+}

@@ -24,7 +24,7 @@ type InstantModule struct{}
 // Returns a container that echoes whatever string argument is provided
 func (m *InstantModule) Compile(ctx context.Context, source *dagger.Directory) (string, error) {
 	bin := dag.Container().
-		From("golang:1.23.1").
+		From("golang:1.23.1-alpine").
 		WithMountedDirectory("/src", source).
 		WithWorkdir("/src").
 		WithExec([]string{"go", "mod", "download"}).
