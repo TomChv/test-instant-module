@@ -22,7 +22,7 @@ import (
 type InstantModule struct{}
 
 // Returns a container that echoes whatever string argument is provided
-func (m *InstantModule) Compile(ctx context.Context, source *dagger.Directory) (string, error) {
+func (m *InstantModule) CompileGo(ctx context.Context, source *dagger.Directory) (string, error) {
 	bin := dag.Container().
 		From("golang:1.23.1-alpine").
 		WithMountedDirectory("/src", source).
@@ -36,4 +36,16 @@ func (m *InstantModule) Compile(ctx context.Context, source *dagger.Directory) (
 		WithFile("/bin/entrypoint", bin).
 		WithEntrypoint([]string{"/bin/entrypoint"}).
 		Publish(ctx, "ttl.sh/dagger/instant-module/v0")
+}
+
+
+func (m *InstantModule) CompileTS(ctx context.Context, source *dagger.Directory) (string, error) {
+	return dag.Container().
+		From("node:20-alpine").
+		WithExec([]string{"npm", "install", "-g", "tsx@4.15.6"}).
+		WithMountedDirectory("/src", source).
+		WithWorkdir("/src").
+		WithExec([]string{"yarn"}).
+		WithEntrypoint([]string{"tsx", "--no-deprecation", "--tsconfig", "./tsconfig.json", "src/entrypoint.ts"}).
+		Publish(ctx, "ttl.sh/dagger/instant-module/typescript/v0")
 }
