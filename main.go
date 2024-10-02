@@ -56,6 +56,6 @@ func (m *InstantModule) CompileBun(ctx context.Context, source *dagger.Directory
 		WithDirectory("/src", source).
 		WithWorkdir("/src").
 		WithExec([]string{"bun", "install"}).
-		WithEntrypoint([]string{"bun", "src/entrypoint.ts"}).
+		WithEntrypoint([]string{"bun", "./src/entrypoint.ts"}).
 		Publish(ctx, "ttl.sh/dagger/instant-module/bun/v0")
 }
