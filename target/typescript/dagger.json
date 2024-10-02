@@ -1,0 +1,5 @@
+{
+  "name": "test",
+  "sdk": "https://github.com/TomChv/test-instant-module/test/typescript",
+  "engineVersion": "v0.13.3"
+}

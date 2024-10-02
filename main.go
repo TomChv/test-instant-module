@@ -46,6 +46,6 @@ func (m *InstantModule) CompileTS(ctx context.Context, source *dagger.Directory)
 		WithMountedDirectory("/src", source).
 		WithWorkdir("/src").
 		WithExec([]string{"yarn"}).
-		WithEntrypoint([]string{"tsx", "--no-deprecation", "--tsconfig", "./tsconfig.json", "src/entrypoint.ts"}).
+		WithEntrypoint([]string{"tsx", "--no-deprecation", "src/entrypoint.ts"}).
 		Publish(ctx, "ttl.sh/dagger/instant-module/typescript/v0")
 }
