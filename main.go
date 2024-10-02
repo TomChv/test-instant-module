@@ -51,11 +51,18 @@ func (m *InstantModule) CompileTS(ctx context.Context, source *dagger.Directory)
 }
 
 func (m *InstantModule) CompileBun(ctx context.Context, source *dagger.Directory) (string, error) {
-	return dag.Container().
+	dist := dag.Container().
 		From("oven/bun:1.1.26-alpine").
 		WithDirectory("/src", source).
 		WithWorkdir("/src").
 		WithExec([]string{"bun", "install"}).
-		WithEntrypoint([]string{"bun", "./src/entrypoint.ts"}).
+		WithExec([]string{"bun", "build", "src/entrypoint.ts", "--target", "bun", "--outdir", "dist"}).
+		File("dist/entrypoint.js")
+
+	return dag.Container().
+		From("oven/bun:1.1.26-alpine").
+		WithFile("/bin/entrypoint.js", dist).
+		WithDirectory("/src", source.Directory("src").WithoutFile("entrypoint.ts")).
+		WithEntrypoint([]string{"bun", "run", "/bin/entrypoint.js"}).
 		Publish(ctx, "ttl.sh/dagger/instant-module/bun/v0")
 }
