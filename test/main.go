@@ -5,7 +5,9 @@ import (
 	"dagger/test-instant/internal/dagger"
 )
 
-type TestInstant struct{}
+type TestInstant struct{
+		RequiredPaths []string
+}
 
 func (t *TestInstant) ModuleRuntime(ctx context.Context, modSource *dagger.ModuleSource, introspectionJSON *dagger.File) (*dagger.Container, error) {
 	return dag.Container().From("ttl.sh/dagger/instant-module/v0@sha256:0574ea0dd7af650b370862173f168ddd58b209c116ca7492a1b5a334d0f3f222"), nil
