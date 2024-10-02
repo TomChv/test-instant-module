@@ -56,8 +56,8 @@ func (m *InstantModule) CompileBun(ctx context.Context, source *dagger.Directory
 		WithDirectory("/src", source).
 		WithWorkdir("/src").
 		WithExec([]string{"bun", "install"}).
-		WithExec([]string{"bun", "build", "src/entrypoint.ts", "--target", "bun", "--outdir", "dist"}).
-		WithEntrypoint([]string{"bun", "run", "./dist/entrypoint.js"}).
-		WithoutFile("src/entrypoint.ts").
+		WithExec([]string{"bun", "build", "src/entrypoint.ts", "--target", "bun", "--outdir", "/dist"}).
+		WithEntrypoint([]string{"bun", "run", "/dist/entrypoint.js"}).
+		WithoutFile("./src/entrypoint.ts").
 		Publish(ctx, "ttl.sh/dagger/instant-module/bun/v0")
 }
