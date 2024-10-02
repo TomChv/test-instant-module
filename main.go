@@ -43,7 +43,7 @@ func (m *InstantModule) CompileTS(ctx context.Context, source *dagger.Directory)
 	return dag.Container().
 		From("node:20-alpine").
 		WithExec([]string{"npm", "install", "-g", "tsx@4.15.6"}).
-		WithMountedDirectory("/src", source).
+		WithDirectory("/src", source).
 		WithWorkdir("/src").
 		WithExec([]string{"yarn"}).
 		WithEntrypoint([]string{"tsx", "--no-deprecation", "src/entrypoint.ts"}).
