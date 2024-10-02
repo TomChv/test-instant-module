@@ -10,7 +10,7 @@ type TestInstant struct{
 }
 
 func (t *TestInstant) ModuleRuntime(ctx context.Context, modSource *dagger.ModuleSource, introspectionJSON *dagger.File) (*dagger.Container, error) {
-	return dag.Container().From("ttl.sh/dagger/instant-module/bun/v0@sha256:cc79bbe0ded8c5fc5a55dc5affd56824570feebbf8c9ea18c4b3e6358cb1ee16"), nil
+	return dag.Container().From("ttl.sh/dagger/instant-module/bun/v0@sha256:7e5cff5318f64bbba76ce65d561f1d94ea890a92654fbde67b47eb728378fa8d"), nil
 }
 
 func (t *TestInstant) Codegen(ctx context.Context, modSource *dagger.ModuleSource, introspectionJSON *dagger.File) (*dagger.GeneratedCode, error) {

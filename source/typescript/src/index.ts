@@ -16,7 +16,7 @@
 import { dag, Container, Directory, object, func } from "@dagger.io/dagger"
 
 @object()
-class InstantModule {
+class Test {
   /**
    * Returns a container that echoes whatever string argument is provided
    */

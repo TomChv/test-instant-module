@@ -1,5 +1,5 @@
 {
-  "name": "instant_module",
+  "name": "test",
   "sdk": "typescript",
   "source": ".",
   "engineVersion": "v0.13.3"
